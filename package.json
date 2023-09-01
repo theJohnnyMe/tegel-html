@@ -4,8 +4,15 @@
   "description": "Playing with Scania's Digital Design System - Tegel",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "npx prettier . --write"
   },
   "author": "Nikola Johnny Mirkovic",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@scania/tegel": "^0.0.12",
+    "http-server": "^14.1.1",
+    "prettier": "^3.0.3"
+  }
 }

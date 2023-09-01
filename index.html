@@ -1,10 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tegel HTML playground</title>
 
-</body>
+    <link
+      rel="stylesheet"
+      href="./node_modules/@scania/tegel/dist/tegel/tegel.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script type="module">
+      import { defineCustomElements } from "./node_modules/@scania/tegel/loader/index.es2017.js";
+      defineCustomElements();
+    </script>
+  </head>
+  <body>
+    <form class="box" id="example-1">
+      <tds-dropdown
+        name="city-dropdown"
+        label="Choose your city"
+        label-position="outside"
+        default-value="osl"
+      >
+        <tds-dropdown-option value="sto">Stockholm</tds-dropdown-option>
+        <tds-dropdown-option value="osl">Oslo</tds-dropdown-option>
+        <tds-dropdown-option value="hel">Helsinki</tds-dropdown-option>
+      </tds-dropdown>
+
+      <tds-button
+        class="tds-u-mt1"
+        type="submit"
+        size="md"
+        text="Submit form"
+      ></tds-button>
+
+      <tds-button
+        class="tds-u-mt1"
+        type="reset"
+        size="md"
+        text="Reset form"
+      ></tds-button>
+
+      <tds-button
+        class="tds-u-mt1"
+        type="button"
+        variant="danger"
+        size="md"
+        text="Reset dropdown"
+        onclick="resetDropdown()"
+      ></tds-button>
+
+      <tds-button
+        class="tds-u-mt1"
+        type="button"
+        size="md"
+        text="Set dropdown"
+        onclick="setDropdown()"
+      ></tds-button>
+    </form>
+
+    <script>
+      // Dropdown reset function
+      function resetDropdown() {
+        const dropdown = document.querySelector("tds-dropdown");
+        dropdown.reset();
+      }
+
+      // Dropdown set function
+      function setDropdown() {
+        const dropdown = document.querySelector("tds-dropdown");
+        dropdown.setValue("osl", "Oslo");
+      }
+
+      document
+        .getElementById("example-1")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the form from actually submitting
+
+          // Create a FormData object from the form
+          const formData = new FormData(this);
+
+          // Get the selected value of dropdown from the FormData
+          const selectedValue = formData.get("city-dropdown");
+
+          // Display an alert with the selected value
+          alert(`Selected value: ${selectedValue}`);
+        });
+    </script>
+  </body>
 </html>
